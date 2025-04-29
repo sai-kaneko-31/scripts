@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 set -eu
 
@@ -26,11 +26,12 @@ alwaysApply: true
 
 EOF
 
-    cat $TMP_DIR/devin.cursorrules/.cursorrules >> ./.cursor/rules/xx_devin_cursorrules.mdc
+    sed 's/\.cursorrules/\.cursor\/rules\/issues\/${task-slug:+${issue-num}-}${task-slug}.md/g' $TMP_DIR/devin.cursorrules/.cursorrules >> ./.cursor/rules/xx_devin_cursorrules.mdc
 
     cat << 'EOF' >> .gitignore
 
 ## devin.cursorrules
+./setup_devin_cursorrules.sh
 ./tools
 ./.cursor/rules/xx_devin_cursorrules.mdc
 
